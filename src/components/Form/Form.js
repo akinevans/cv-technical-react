@@ -65,12 +65,22 @@ export default function Form() {
       //   handleSubmit(e);
       // }}
     >
+      <h1 className='title'>Clearviction Technical - React Version</h1>
+      <a
+        className='credit'
+        href='https://www.linkedin.com/in/akinevans/'
+        target='_blank'
+        rel='noreferrer'
+      >
+        Akin Evans
+      </a>
       <label htmlFor='email'>Email *</label>
       <input
         className={`form-input ${emailError ? "error" : ""}`}
         id='email'
         type='email'
         name='email'
+        placeholder='Your Email'
         onChange={(e) => {
           //reset error state
           setEmailError(false);
