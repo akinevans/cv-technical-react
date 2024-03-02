@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import ErrorModal from "../ErrorModal/ErrorModal";
 import "./Form.css";
 
 //TODO: build error state modals
@@ -74,7 +75,13 @@ export default function Form() {
       >
         Akin Evans
       </a>
-      <label htmlFor='email'>Email *</label>
+      <label htmlFor='email'>
+        Email *
+        <ErrorModal
+          className={`${!emailError ? "hidden" : ""}`}
+          message='Please enter a valid e-mail address.'
+        />
+      </label>
       <input
         className={`form-input ${emailError ? "error" : ""}`}
         id='email'
@@ -89,7 +96,13 @@ export default function Form() {
         }}
       />
 
-      <label htmlFor='githubRepoUrl'>GitHub Repo URL *</label>
+      <label htmlFor='githubRepoUrl'>
+        GitHub Repo URL *
+        <ErrorModal
+          className={`${!urlError ? "hidden" : ""}`}
+          message='Please enter a valid Github URL.'
+        />
+      </label>
       <input
         className={`form-input ${urlError ? "error" : ""}`}
         id='githubRepoUrl'
@@ -102,7 +115,6 @@ export default function Form() {
           // console.log(url);
         }}
       />
-
       {/* Submit Btn  */}
       <input
         className='submit-btn'
