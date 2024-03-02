@@ -2,47 +2,57 @@ import React from "react";
 import { useState } from "react";
 import "./Form.css";
 
-//TODO: error modals
+//TODO: build error state modals
+//TODO: build error state modals
+//TODO: build error state modals
 
 //utility imports
 import {
   handleChange,
   validateEmail,
+  processURL,
 } from "../../utilityFunctions/utilityFunctions";
 
 export default function Form() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
-  const [url, setUrl] = useState("https://");
+
+  const [url, setUrl] = useState("");
+  const [urlError, setUrlError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validateEmail(email, setEmailError) === false) {
-      setEmailError(true);
-    } else {
-      alert(email);
-      alert(url);
+    if (validateEmail(email, setEmailError)) {
+      console.log(email);
+      console.log(url);
 
-      const formData = {
-        email: email,
-        githubRepoUrl: url,
-      };
+      if (processURL(url, setUrlError)) {
+        console.log(url);
 
-      //TODO: refactor to use await + hooks
-      fetch("https://cv-devs-temp-challenge.vercel.app/api/challenge", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
+        const formData = {
+          email: email,
+          githubRepoUrl: url,
+        };
+
+        //TODO: refactor to use await + hooks
+        //TODO: refactor to use await + hooks
+        //TODO: refactor to use await + hooks
+
+        // fetch("https://cv-devs-temp-challenge.vercel.app/api/challenge", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(formData),
+        // })
+        //   .then((res) => {
+        //     return res.json();
+        //   })
+        //   .then((data) => {
+        //     console.log(data);
+        //   });
+      }
     }
   };
 
@@ -51,9 +61,9 @@ export default function Form() {
       //   method='POST'
       id='submit-user-info-form'
       className='form-wrapper'
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
+      // onSubmit={(e) => {
+      //   handleSubmit(e);
+      // }}
     >
       <label htmlFor='email'>Email *</label>
       <input
@@ -62,6 +72,8 @@ export default function Form() {
         type='email'
         name='email'
         onChange={(e) => {
+          //reset error state
+          setEmailError(false);
           handleChange(e, "email", setEmail, setUrl);
           // console.log(email);
         }}
@@ -69,18 +81,28 @@ export default function Form() {
 
       <label htmlFor='githubRepoUrl'>GitHub Repo URL *</label>
       <input
-        className='form-input'
+        className={`form-input ${urlError ? "error" : ""}`}
         id='githubRepoUrl'
         type='url'
         name='githubRepoUrl'
         onChange={(e) => {
+          //reset error state
+          setUrlError(false);
           handleChange(e, "url", setEmail, setUrl);
           // console.log(url);
         }}
       />
 
       {/* Submit Btn  */}
-      <input className='submit-btn' type='submit' value='Submit' />
+      <input
+        className='submit-btn'
+        type='submit'
+        value='Submit'
+        onClick={(e) => {
+          e.preventDefault();
+          handleSubmit(e);
+        }}
+      />
     </form>
   );
 }

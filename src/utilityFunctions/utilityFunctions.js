@@ -1,16 +1,21 @@
 export const handleChange = (e, field, setEmail, setUrl) => {
-  console.log(e);
+  // console.log(e);
+  const HTTP = "https://";
+
   if (field === "email") {
     setEmail(e.target.value);
   } else if (field === "url") {
-    setUrl(e.target.value);
+    setUrl(HTTP + e.target.value);
   }
   return;
 };
 
+//
+//
+//
+
 export const validateEmail = (email, setEmailError) => {
-  alert("in email validation");
-  if (email.length <= 0) {
+  if (email.length === 0) {
     setEmailError(true);
     return false;
   }
@@ -32,3 +37,52 @@ export const validateEmail = (email, setEmailError) => {
     return false;
   }
 };
+
+//
+//
+//
+
+export const processURL = (url, setUrlError) => {
+  // edge cases
+  if (url === "https://" || url.length === 0) {
+    setUrlError(true);
+    return false;
+  }
+
+  if (validateURL(url)) {
+    setUrlError(false);
+    return true;
+  } else {
+    setUrlError(true);
+    return false;
+  }
+};
+
+function validateURL(value) {
+  const URLRegEx = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR IP (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$", // fragment locator
+    "i"
+  );
+
+  try {
+    const validatedURL = new URL(value);
+
+    // check if the correct protocol is being used
+    if (
+      validatedURL.protocol === "http:" ||
+      validatedURL.protocol === "https:"
+    ) {
+      // check url against RegExp
+      return URLRegEx.test(value);
+    }
+  } catch (error) {
+    console.log(error);
+    // throw new Error(error);
+    return false;
+  }
+}
