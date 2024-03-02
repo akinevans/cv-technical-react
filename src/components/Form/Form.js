@@ -7,7 +7,7 @@ import { handleChange } from "../../utilityFunctions/utilityFunctions";
 
 export default function Form() {
   const [email, setEmail] = useState("");
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("https://");
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
@@ -53,7 +53,8 @@ export default function Form() {
         name='email'
         required
         onChange={(e) => {
-          handleChange(e, "email", setEmail);
+          handleChange(e, "email", setEmail, setUrl);
+          console.log(email);
         }}
       />
 
@@ -64,8 +65,10 @@ export default function Form() {
         type='url'
         name='githubRepoUrl'
         required
+        value={url}
         onChange={(e) => {
-          handleChange(e, "url", setUrl);
+          handleChange(e, "url", setEmail, setUrl);
+          console.log(url);
         }}
       />
 
