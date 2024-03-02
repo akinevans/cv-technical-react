@@ -92,6 +92,7 @@ label {
 }
 
 .submit-btn:active {
+  opacity: 80%;
   background-color: #085b6a;
   transition: 0.1s all ease-in-out;
 }

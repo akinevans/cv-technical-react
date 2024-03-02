@@ -36,23 +36,27 @@ export default function Form() {
           githubRepoUrl: url,
         };
 
-        //TODO: refactor to use await + hooks
-        //TODO: refactor to use await + hooks
-        //TODO: refactor to use await + hooks
+        async function postData() {
+          try {
+            const response = await fetch(
+              "https://cv-devs-temp-challenge.vercel.app/api/challenge",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              }
+            );
 
-        // fetch("https://cv-devs-temp-challenge.vercel.app/api/challenge", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(formData),
-        // })
-        //   .then((res) => {
-        //     return res.json();
-        //   })
-        //   .then((data) => {
-        //     console.log(data);
-        //   });
+            const data = await response.json();
+            console.log(data);
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        }
+
+        postData();
       }
     }
   };
