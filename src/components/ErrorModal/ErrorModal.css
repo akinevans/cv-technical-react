@@ -1,0 +1,40 @@
+.error-modal-wrapper {
+  position: absolute;
+  top: 0;
+  left: -175px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  max-width: 150px;
+  height: fit-content;
+  padding: 10px 5px;
+  background-color: #595959;
+  border-radius: 18px;
+  z-index: 1;
+}
+
+.error-message {
+  width: 75%;
+  height: fit-content;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.arrow-right {
+  position: absolute;
+  top: 25px;
+  right: -14px;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid #595959;
+}
+
+/* utility class */
+.hidden {
+  display: none;
+}
