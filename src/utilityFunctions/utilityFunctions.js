@@ -5,7 +5,16 @@ export const handleChange = (e, field, setEmail, setUrl) => {
   if (field === "email") {
     setEmail(e.target.value);
   } else if (field === "url") {
-    setUrl(HTTP + e.target.value);
+    if (
+      e.target.value.includes("https://") ||
+      e.target.value.includes("http://")
+    ) {
+      setUrl(e.target.value);
+      console.log("url: ", e.target.value);
+      return;
+    } else {
+      setUrl(HTTP + e.target.value);
+    }
   }
   return;
 };
@@ -77,7 +86,7 @@ function validateURL(value) {
       validatedURL.protocol === "http:" ||
       validatedURL.protocol === "https:"
     ) {
-      // check url against RegExp
+      // check url against RegExp, returns a boolean
       return URLRegEx.test(value);
     }
   } catch (error) {

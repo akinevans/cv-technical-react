@@ -25,11 +25,11 @@ export default function Form() {
     e.preventDefault();
 
     if (validateEmail(email, setEmailError)) {
-      console.log(email);
-      console.log(url);
+      // console.log(email);
+      // console.log(url);
 
       if (processURL(url, setUrlError)) {
-        console.log(url);
+        // console.log(url);
 
         const formData = {
           email: email,
@@ -50,6 +50,7 @@ export default function Form() {
             );
 
             const data = await response.json();
+            console.log(response);
             console.log(data);
           } catch (error) {
             console.error("Error:", error);
