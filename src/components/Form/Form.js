@@ -24,9 +24,11 @@ export default function Form() {
 
     if (validateEmail(email, setEmailError)) {
       // console.log(email);
+      console.log(typeof email);
 
       if (processURL(url, setUrlError)) {
         // console.log(url);
+        console.log(typeof url);
 
         // place the user entered form data into an object, formData
         const formData = {
@@ -62,11 +64,7 @@ export default function Form() {
   };
 
   return (
-    <form
-      //   method='POST'
-      id='submit-user-info-form'
-      className='form-wrapper'
-    >
+    <form id='submit-user-info-form' className='form-wrapper'>
       <h1 className='title'>Clearviction Technical - React Version</h1>
       <a
         className='credit'
@@ -90,7 +88,7 @@ export default function Form() {
         name='email'
         placeholder='Your Email'
         onChange={(e) => {
-          //reset error state
+          //reset email error state
           setEmailError(false);
           handleChange(e, "email", setEmail, setUrl);
           // console.log(email);
@@ -110,7 +108,7 @@ export default function Form() {
         type='url'
         name='githubRepoUrl'
         onChange={(e) => {
-          //reset error state
+          //reset url error state
           setUrlError(false);
           handleChange(e, "url", setEmail, setUrl);
           // console.log(url);
