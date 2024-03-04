@@ -1,22 +1,18 @@
 export const handleChange = (e, field, setEmail, setUrl) => {
-  // console.log(e);
   const HTTP = "https://";
+  let formValue = e.target.value;
 
   if (field === "email") {
-    setEmail(e.target.value);
+    setEmail(formValue);
   } else if (field === "url") {
-    if (
-      e.target.value.includes("https://") ||
-      e.target.value.includes("http://")
-    ) {
-      setUrl(e.target.value);
-      console.log("url: ", e.target.value);
-      return;
+    // check if url contains a protocol, if not, concat "https://"" to url
+    if (formValue.includes("https://") || formValue.includes("http://")) {
+      setUrl(formValue);
+      console.log("url: ", formValue);
     } else {
-      setUrl(HTTP + e.target.value);
+      setUrl(HTTP + formValue);
     }
   }
-  return;
 };
 
 //
@@ -24,6 +20,7 @@ export const handleChange = (e, field, setEmail, setUrl) => {
 //
 
 export const validateEmail = (email, setEmailError) => {
+  //edge case
   if (email.length === 0) {
     setEmailError(true);
     return false;
@@ -38,11 +35,9 @@ export const validateEmail = (email, setEmailError) => {
 
   if (isValidEmail) {
     setEmailError(false);
-    // alert("Email is VALID");
     return true;
   } else {
     setEmailError(true);
-    // alert("Email NOT VALID");
     return false;
   }
 };
@@ -68,6 +63,7 @@ export const processURL = (url, setUrlError) => {
 };
 
 function validateURL(value) {
+  // url value will be checked against this RegExp to ensure it is a valid url
   const URLRegEx = new RegExp(
     "^(https?:\\/\\/)?" + // protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
@@ -80,8 +76,7 @@ function validateURL(value) {
 
   try {
     const validatedURL = new URL(value);
-
-    // check if the correct protocol is being used
+    // check if a correct protocol is being used
     if (
       validatedURL.protocol === "http:" ||
       validatedURL.protocol === "https:"
@@ -91,7 +86,6 @@ function validateURL(value) {
     }
   } catch (error) {
     console.log(error);
-    // throw new Error(error);
     return false;
   }
 }

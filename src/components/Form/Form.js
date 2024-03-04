@@ -3,11 +3,7 @@ import { useState } from "react";
 import ErrorModal from "../ErrorModal/ErrorModal";
 import "./Form.css";
 
-//TODO: build error state modals
-//TODO: build error state modals
-//TODO: build error state modals
-
-//utility imports
+//utility function imports
 import {
   handleChange,
   validateEmail,
@@ -21,21 +17,24 @@ export default function Form() {
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState(false);
 
+  // process form submission
   const handleSubmit = (e) => {
+    // prevent forms default operation
     e.preventDefault();
 
     if (validateEmail(email, setEmailError)) {
       // console.log(email);
-      // console.log(url);
 
       if (processURL(url, setUrlError)) {
         // console.log(url);
 
+        // place the user entered form data into an object, formData
         const formData = {
           email: email,
           githubRepoUrl: url,
         };
 
+        // make fetch request
         async function postData() {
           try {
             const response = await fetch(
@@ -49,6 +48,7 @@ export default function Form() {
               }
             );
 
+            //display response / errors
             const data = await response.json();
             console.log(response);
             console.log(data);
@@ -56,7 +56,6 @@ export default function Form() {
             console.error("Error:", error);
           }
         }
-
         postData();
       }
     }
@@ -67,9 +66,6 @@ export default function Form() {
       //   method='POST'
       id='submit-user-info-form'
       className='form-wrapper'
-      // onSubmit={(e) => {
-      //   handleSubmit(e);
-      // }}
     >
       <h1 className='title'>Clearviction Technical - React Version</h1>
       <a
