@@ -74,7 +74,7 @@ label {
 
 .form-input:active,
 .form-input:focus {
-  outline: 2px solid #11a2bb;
+  outline: 2px solid #12bbd9;
   transition: 0.1s all ease-in-out;
 }
 
@@ -84,7 +84,7 @@ label {
   padding: 14px 0;
   font-size: 1rem;
   color: #fff;
-  background-color: #11a2bb;
+  background-color: #12bbd9;
   border-radius: 8px;
   border: none;
   cursor: pointer;
